@@ -44,7 +44,10 @@ async def get_order(order_id: uuid.UUID, db: AsyncSession = Depends(get_db)):
 
 @router.post("/", response_model=OrderOut, status_code=201)
 async def create_order(payload: OrderCreate, db: AsyncSession = Depends(get_db)):
+    # generate a short human readable order number
     order_number = f"ORD-{uuid.uuid4().hex[:8].upper()}"
+
+    # pricing: subtotal + 8% tax, free shipping over $500
     total = sum(item.quantity * item.unit_price for item in payload.items)
     tax = round(total * 0.08, 2)
     shipping = 0.0 if total > 500 else 25.00
@@ -75,6 +78,7 @@ async def create_order(payload: OrderCreate, db: AsyncSession = Depends(get_db))
 
 @router.get("/stats/summary")
 async def order_stats(db: AsyncSession = Depends(get_db)):
+    # count orders grouped by their current status
     result = await db.execute(
         select(Order.status, func.count(Order.id)).group_by(Order.status)
     )

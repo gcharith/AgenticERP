@@ -27,6 +27,7 @@ async def list_products(
     if category:
         stmt = stmt.where(Product.category == category)
     if low_stock:
+        # only return products that are at or below their reorder point
         stmt = stmt.where(Product.quantity_on_hand <= Product.reorder_point)
     result = await db.execute(stmt)
     return result.scalars().all()
