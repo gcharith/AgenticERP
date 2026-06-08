@@ -30,12 +30,14 @@ class VectorStoreService:
             logger.info(f"Created Qdrant collection: {self.collection}")
 
     def upsert(self, doc_id: str, embedding: list[float], payload: dict[str, Any]) -> None:
+        """Insert or update a single document vector with its metadata payload."""
         self.client.upsert(
             collection_name=self.collection,
             points=[PointStruct(id=doc_id, vector=embedding, payload=payload)],
         )
 
     def search(self, query_embedding: list[float], limit: int = 10) -> list[dict[str, Any]]:
+        """Return the top-k most similar documents for a query embedding."""
         results = self.client.search(
             collection_name=self.collection,
             query_vector=query_embedding,

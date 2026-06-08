@@ -32,8 +32,10 @@ class LLMService:
         )
 
     async def chat(self, messages: list[dict[str, str]], provider: str = "openai", **kwargs: Any) -> str:
+        """Send a list of role/content messages to the chosen provider and return the reply text."""
         from langchain_core.messages import HumanMessage, SystemMessage
 
+        # convert our simple dict messages into langchain message objects
         lc_messages = []
         for m in messages:
             if m["role"] == "system":
@@ -46,9 +48,11 @@ class LLMService:
         return response.content
 
     async def embed(self, text: str) -> list[float]:
+        """Return the embedding vector for a single piece of text."""
         return self.embeddings.embed_query(text)
 
     async def embed_batch(self, texts: list[str]) -> list[list[float]]:
+        """Return embedding vectors for a batch of texts in one call."""
         return self.embeddings.embed_documents(texts)
 
 
