@@ -3,7 +3,7 @@
 > Autonomous agents that transform legacy ERP systems into modern, AI-driven platforms.
 > Built by the **Modernization Strike Team**.
 
-### 🌐 [Live Demo → https://agent-erp-3osf.onrender.com](https://agent-erp-3osf.onrender.com)
+### 🌐 LIVE DEMO : 
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)
