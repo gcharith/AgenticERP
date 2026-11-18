@@ -1,7 +1,7 @@
 # 🤖 AgentERP — AI-Powered ERP Modernization Platform
 
 > Autonomous agents that transform legacy ERP systems into modern, AI-driven platforms.
-> Built by the **Modernization Strike Team**.
+
 
 ### 🌐 LIVE DEMO : 
 
